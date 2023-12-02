@@ -2,4 +2,15 @@ Mind_Map_overview
 
 The Main purpose of this project is the create a simulation.
 More specifically a simulation that will be able to simulate oribits of a circumbinary planet. 
+
+#objectives
 The simulation will be made in Matplotlib
+The simulation will contain one planet and two orbiting stars 
+The only variable that should be changed are the (x,y) velocity and position of the planet 
+There should be a gravitational force that attracts the celestial bodies 
+
+#Limitations
+The stars each have a mass of 1M (which is the equivilant of 3,955×10^30 kg)
+The stars will have a constant velocity
+The orbit each the center of mass at the distance of 1 Au (149 597 870 700 m)
+
