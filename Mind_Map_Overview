@@ -6,7 +6,7 @@ More specifically a simulation that will be able to simulate oribits of a circum
 #objectives
 The simulation will be made in Matplotlib
 The simulation will contain one planet and two orbiting stars 
-The only variable that should be changed are the (x,y) velocity and position of the planet 
+The only variables that should be changed are the (x,y) velocity and position of the planet 
 There should be a gravitational force that attracts the celestial bodies 
 
 #Limitations
