@@ -1,0 +1,6 @@
+#how to call classes from files 
+    #from (file_name) import (class_name)
+
+#how to use classes
+    #name = class_name(value1, value2, .....)
+    

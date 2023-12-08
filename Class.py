@@ -1,6 +1,5 @@
 import math
 
-
 #Class for planet and Sun
 class Planet: 
     AU = 149.6e6 * 1000 

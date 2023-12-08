@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 import numpy as np 
 import matplotlib.animation as animation
  
+#Import Classes from class file
+from Class import Planet
+
 #Gives both stars x and y coordinates
 x =[2,-2]
 y = [2,-2]
