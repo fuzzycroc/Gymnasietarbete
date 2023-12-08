@@ -1,0 +1,18 @@
+CONSTANTS 
+
+G = 6.67430 * 10**-11 
+M = 3.955 * 10**30 
+Au = 1.496 * 10**11 
+
+--:--
+Distance from focus_point (Stars) = 1AU 
+Mass Of Stars = M 
+
+
+REFERENCE_SHEET
+#how to call classes from files 
+    #from (file_name) import (class_name)
+
+#how to use classes
+    #name = class_name(value1, value2, .....)
+    
