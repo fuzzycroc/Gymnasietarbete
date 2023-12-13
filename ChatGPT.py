@@ -11,16 +11,15 @@ class Star:
         # Plotting the star at the specified coordinates
         plt.scatter(self.x, self.y, marker='*', color='gold', s=200)
 
-# Example usage:
-if __name__ == "__main__":
-    # Create an instance of the Star class with coordinates (2, 3)
-    star_instance = Star(2, 3)
 
-    # Draw the star
-    star_instance.draw()
+star_instance1 = Star(2, 3)
+star_instance2 = Star(0,0)
 
-    # Set plot limits and show the plot
-    plt.xlim(0, 5)
-    plt.ylim(0, 5)
-    plt.gca().set_aspect('equal', adjustable='box')
-    plt.show()
+    
+star_instance1.draw()
+star_instance2.draw()
+
+plt.xlim(-12, 12)
+plt.ylim(-12, 12)
+plt.gca().set_aspect('equal', adjustable='box')
+plt.show()
