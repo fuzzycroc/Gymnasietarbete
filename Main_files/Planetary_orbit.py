@@ -1,7 +1,7 @@
 #imports 
 import matplotlib.pyplot as plt 
 import numpy as np
-
+from matplotlib import animation
 
 time = 1000
 for i in range (1000):
@@ -27,24 +27,30 @@ class Star:
     def attraction(self):
         G = 6.67408e-11 #N-m2/kg2
         Au = 1,496e+11 #Au to m
+    
+            
+
+    
          
-
-
 
 
         
 #Creates bodies
-Star_1 = Star(1, 0, 20, 0, 0, 10, 'o','red')
-binary_Star_2 = Star(-1, 0, 20, 0, 0, 10, 'o', 'yellow')
-planet = Star(4, 4, 4, 0, 0, 14,'*', 'blue')
+Star_1 = Star(100, 0, 20, 20, 0, 10, 'o','red') #this one has x_vel
+
+
+Binary_Star_2 = Star(-1, 0, 20, 0, 0, 10, 'o', 'black')
+planet = Star(40, 40, 4, 0, 0, 14,'*', 'blue')
+
 
 
 #draws bodies
 Star_1.draw()
-binary_Star_2.draw()
+Binary_Star_2.draw()
 planet.draw()
 
-plt.xlim (-12, 12)
-plt.ylim (-12, 12)
+
+plt.xlim (-120, 120)
+plt.ylim (-120, 120)
 plt.show()
 
