@@ -1,10 +1,10 @@
 This is the main outline where i will be sorting out my thoughts
 
 1. Create a timer for 1000 steps 
-2. A loop that does -1 from the 1000 steps  #done 
+2. By steps I mean the orbiting period of the stars!! 
 
-3. create a class for a star 
-4. give each star the proporties of 
+3. create a class for a star and planet
+4. give each star and planet the proporties of 
     
     x and y coordinates 
     radius 
@@ -15,9 +15,12 @@ This is the main outline where i will be sorting out my thoughts
     x and y velocity
 
 5. Define the calculation needed for cacluating the acceleration of a mass (Newton's gravitational law)
-6. Use the odient Funciton to return x and y coordinates 
-7. use a loop to update the x and y (coordinates and velocity)
+6. Use the odient Funciton to return x and y coordinates (Unsure how to use)
+7. use a loop to update the x and y (coordinates and velocity) 
+
+8. Create a animation?
 
 Imports needed: 
 import matplotlib.pyplot as plt 
 import math 
+
