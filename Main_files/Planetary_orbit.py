@@ -27,29 +27,9 @@ class Star:
     def attraction(self):
         G = 6.67408e-11 #N-m2/kg2
         Au = 1,496e+11 #Au to m
+       
    
-    #Issue no.1: Gravitational force defines the attraction between two bodies. 
-    #This leads to a certain acceleration that is experienced by both the objects 
-        
-    #Question 1: As far as I have understood python can only uncderstand x and y position and not acceleration
-    #How do I translate Acceleration into x and y velocity.
-    #But at the same time make it so that there is x and y velocity of the planet and the stars
-        # I thought of using Odient from Scipy.intergrate.odient to solve it.
-        # But I have no idea how it works :(
 
-    #Question 2: How do I use the veolcity to give the bodies new x and y positions?
-            
-    #Question 3: How do I draw the orbits? This part is very important for analysing data for my project 
-        #I only know how to update the positons but not how to draw a line from the last position to the new one
-    
-    #Question 4: Is it possible to get graphs or just data on min and max values (Perihilion and Aphelion) of the planets orbit?
-
-    #Question 5: Is it possible to animate the simulation?
-        # I thought of using Funanimation to do this. 
-        # But I have only grasped the basics 
-        # This part is optional but it looks really cool :)
-    
-    #Issue no.2: How on earth do I make the x and y coordinates in AU (Astronomical Units)!!!
         
 
 

@@ -24,3 +24,13 @@ Imports needed:
 import matplotlib.pyplot as plt 
 import math 
 
+ # Use Scipy.intergrate to solve for velocity from acceleration
+    #Use an array to store positional data and velocity 
+    #Use https://www.digitalocean.com/community/tutorials/vectors-in-python this to add the vectors 
+    #Covert the velocity vectors into position
+
+    #Use funcanimation to do animate the orbits https://matplotlib.org/stable/users/explain/animations/animations.html
+    
+    #It is possible to get the min and max values, just create a seperate graph for this
+    
+    #Make sure everything is in SI units and to specify that 1 coordinate is multiplied with 1AU
