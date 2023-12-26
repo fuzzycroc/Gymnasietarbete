@@ -65,8 +65,8 @@ def ThreeBodyEquations(w,Time_scale,G,Mass_1,Mass_2):
     Distance_2_1 = sci.linalg.norm(Star_Pos_2-Star_Pos_1)
 
     #Define the derivatives according to th equations 
-    Derivative_Velocity_1 = Equation_1 * Mass_2 (Star_Pos_2-Star_Pos_1)/Distance_1_2 ** 3
-    Derivative_Velocity_2 = Equation_1 * Mass_1 (Star_Pos_1-Star_Pos_1)/Distance_2_1 ** 3
+    Derivative_Velocity_1 = Equation_1 * Mass_2 * (Star_Pos_2-Star_Pos_1)/Distance_1_2 ** 3
+    Derivative_Velocity_2 = Equation_1 * Mass_1 * (Star_Pos_1-Star_Pos_2)/Distance_2_1 ** 3
     Derrivative_Position_1 = Equation_2 * Velocity_1
     Derrivative_Position_2 = Equation_2 * Velocity_2 
 
@@ -82,12 +82,30 @@ init_parameters = init_parameters.flatten()
 Time_span = np.linspace(0,20,1000) #Time span is 20 orbital years and 1000 points 
 
 #Run the ODE Solver
-Three_body_solver = sci.integrate.odeint(ThreeBodyEquations, init_parameters, Time_span, args=(G,Mass_1,Mass_2))
+Three_body_solver = sci.integrate.odeint(ThreeBodyEquations, init_parameters, Time_span, args=(G, Mass_1, Mass_2))
 
 #Store the position solutions into three distinct arrays 
 Star_Pos_1_Solution = Three_body_solver[:, :2]
 Star_Pos_2_Solution = Three_body_solver[:, 2:5]
 
-#Plat the orbits of the three bodies 
-plt.figure (figsize = (15,15))
-plt.plot()
+#Chat GPT 3d to 2d code conversion
+
+plt.figure(figsize=(10,8))
+
+#Plot the orbits
+plt.plot(Star_Pos_1_Solution[:, 0], Star_Pos_1_Solution[:, 1], color = "mediumblue", label = "Star1")
+plt.plot(Star_Pos_2_Solution[:, 0], Star_Pos_2_Solution[:,1], color = "red", label = "Star2")
+
+#Plot a scatter plot for the final positions 
+plt.scatter(Star_Pos_1_Solution[-1,0], Star_Pos_1_Solution[-1,1], color = "darkblue", marker = "o", s = 80, label = "Star_1")
+plt.scatter(Star_Pos_2_Solution[-1,0], Star_Pos_2_Solution[-1,1], color = "darkred", marker = "o", s = 80, label = "Star_2")
+
+plt.xlabel("x-coordinate", fontsize = 14)
+plt.ylabel("y-coordinate", fontsize = 14)
+plt.title("Star_Gazer_Method", fontsize = 14)
+
+#add legend 
+plt.legend()
+
+#Show the plot 
+plt.show()
