@@ -3,8 +3,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import animation
 
-#Timer trail for measuring orbital periods of the binary stars STATUS: Non-functional
-time = 1000
+G = 6.67408e-11 #N-m2/kg2
+Au = 1,496e+11 #Au to m
+time_scale = 24*3600
+velocity = 3000 #m/s
+
 
 #Class for the Star and Planet 
 class Star: 
@@ -24,21 +27,11 @@ class Star:
     def draw(self):
         plt.scatter(self.x, self.y, s = self.radius**2, c= self.color, marker = self.marker)
     
-    def attraction(self):
-        G = 6.67408e-11 #N-m2/kg2
-        Au = 1,496e+11 #Au to m
-       
-   
-
-        
-
-
 
         
 #Creates bodies
-Star_1 = Star(100, 0, 20, 20, 0, 10, 'o','red') #this one has x_vel
 
-
+Star_1 = Star(100, 0, 20, 0, 0, 10, 'o', 'red')
 Binary_Star_2 = Star(-1, 0, 20, 0, 0, 10, 'o', 'black')
 planet = Star(40, 40, 4, 0, 0, 14,'*', 'blue')
 
