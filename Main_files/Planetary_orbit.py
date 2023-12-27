@@ -7,7 +7,7 @@ G = 6.67408e-11 #N-m2/kg2
 Au = 1,496e+11 #Au to m
 time_scale = 24*3600
 velocity = 3000 #m/s
-
+Main_Stardistance = [2*Au]
 
 #Class for the Star and Planet 
 class Star: 
@@ -46,4 +46,4 @@ planet.draw()
 plt.xlim (-120, 120)
 plt.ylim (-120, 120)
 plt.show()
-
+    

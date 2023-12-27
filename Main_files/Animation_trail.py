@@ -1,4 +1,4 @@
-#This code works but is not animated 
+#File for testing animation of matplotlib animation
 
 import scipy as sci
 import matplotlib.pyplot as plt
@@ -89,28 +89,15 @@ Three_body_solver = sci.integrate.odeint(ThreeBodyEquations, init_parameters, Ti
 Star_Pos_1_Solution = Three_body_solver[:, :2]
 Star_Pos_2_Solution = Three_body_solver[:, 2:5]
 
-#Chat GPT 3d to 2d code conversion
-
+#Make the figure
 plt.figure(figsize=(10,8))
 
-#Plot the orbits
-plt.plot(Star_Pos_1_Solution[:, 0], Star_Pos_1_Solution[:, 1], color = "mediumblue", label = "Star1")
-plt.plot(Star_Pos_2_Solution[:, 0], Star_Pos_2_Solution[:,1], color = "red", label = "Star2")
 
-#Plot a scatter plot for the final positions 
-plt.scatter(Star_Pos_1_Solution[-1,0], Star_Pos_1_Solution[-1,1], color = "darkblue", marker = "o", s = 80, label = "Star_1")
-plt.scatter(Star_Pos_2_Solution[-1,0], Star_Pos_2_Solution[-1,1], color = "darkred", marker = "o", s = 80, label = "Star_2")
+#create new arrays for animation, this gives you the flexibility
+#to reduce the number of points in the animation if it becoms slow
+#currently set to select every 4th point
+Star_Pos_1_Solution_Animation = Star_Pos_1_Solution[::1,:].copy()
+Star_Pos_2_Solution_Animation = Star_Pos_2_Solution[::1,:].copy()
 
-plt.xlabel("x-coordinate", fontsize = 14)
-plt.ylabel("y-coordinate", fontsize = 14)
-plt.title("Star_Gazer_Method", fontsize = 14)
-
-#add legend 
-plt.legend()
-
-#Graph limits
-plt.xlim(-5,5)
-plt.ylim(-5,5)
-
-#Show the plot 
-plt.show()
+#Set initial marker for planets, that is, blue, red circles at the initial positions 
+Head_1 =[ax.scatter(Star_Pos_1_Solution_Animation)]
