@@ -2,6 +2,14 @@ import rebound
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
+
+# Initial conditions for the planet (you can change these values)
+initial_planet_x = 0.0
+initial_planet_y = 0.513
+initial_planet_vx = 0.0
+initial_planet_vy = 0.0
+
+
 # Function to set up the simulation
 def setup_simulation(planet_x, planet_y, planet_vx, planet_vy):
     sim = rebound.Simulation()
@@ -19,7 +27,7 @@ def setup_simulation(planet_x, planet_y, planet_vx, planet_vy):
 
     # Set up simulation parameters
     sim.move_to_com()
-    sim.integrator = "whfast"
+    sim.integrator = "ias15"
     sim.dt = 0.02
 
     return sim
@@ -30,32 +38,26 @@ def update(frame, ax, sim):
     ax.cla()
 
     # Plot stars
-    ax.scatter(sim.particles["star1"].x, sim.particles["star1"].y, color="red", s=200, label="Star 1")
-    ax.scatter(sim.particles["star2"].x, sim.particles["star2"].y, color="blue", s=200, label="Star 2")
+    ax.scatter(sim.particles["star1"].x, sim.particles["star1"].y, color="red", s=10, label="Star 1")
+    ax.scatter(sim.particles["star2"].x, sim.particles["star2"].y, color="blue", s=10, label="Star 2")
 
     # Plot planet
     ax.scatter(sim.particles["planet"].x, sim.particles["planet"].y, color="green", s=50, label="Planet")
 
-    plt.scatter(x=0,y=0, s=10, marker='*')
 
     # Set plot limits and labels
-    ax.set_xlim(-12, 12)
-    ax.set_ylim(-12, 12)
+    ax.set_xlim(-2, 2)
+    ax.set_ylim(-2, 2)
     ax.set_xlabel("X Coordinate")
     ax.set_ylabel("Y Coordinate")
     ax.legend()
 
-# Initial conditions for the planet (you can change these values)
-initial_planet_x = 0.0
-initial_planet_y = 1.5
-initial_planet_vx = 0.5
-initial_planet_vy = 0.0
 
 # Set up the initial simulation
 simulation = setup_simulation(initial_planet_x, initial_planet_y, initial_planet_vx, initial_planet_vy)
 
 # Create the plot and animation
 fig, ax = plt.subplots()
-animation = FuncAnimation(fig, update, fargs=(ax, simulation), frames=500, interval=50, blit=False)
+animation = FuncAnimation(fig, update, fargs=(ax, simulation), frames=10, interval=50, blit=False)
 
 plt.show()
