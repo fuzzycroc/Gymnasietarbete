@@ -19,7 +19,8 @@ def setup_simulation():
     # Set up simulation parameters
     sim.move_to_com()
     sim.integrator = "ias15"
-    
+    sim.dt = 0.1
+
     return sim
 
 # Function to update the plot in each animation frame
@@ -32,6 +33,8 @@ def update(frame, ax, sim, orbits):
     ax.scatter(sim.particles["star2"].x, sim.particles["star2"].y, color="blue", s=100, label="Star 2")
 
     ax.scatter(sim.particles["Planet"].x, sim.particles["Planet"].y, color="black", s=50, label="Planet")
+
+    plt.scatter(x=X_Planet, y=Y_Planet, marker= "*", s=40, color = "green", label = "Starting Position" )
 
     # Plot orbits for stars
     for i in range(3):
@@ -48,8 +51,8 @@ def update(frame, ax, sim, orbits):
     # Set plot limits and labels
     ax.set_xlim(-Limits, Limits)
     ax.set_ylim(-Limits, Limits)
-    ax.set_xlabel("X Coordinate")
-    ax.set_ylabel("Y Coordinate")
+    ax.set_xlabel("X Coordinate(AU)")
+    ax.set_ylabel("Y Coordinate(AU)")
     ax.legend()
 
 # Set up the initial simulation
@@ -62,7 +65,7 @@ fig, ax = plt.subplots()
 orbits = [[] for _ in range(3)]
 
 # Update the plot without animation
-for _ in range(200):
+for _ in range(1000):
     update(_, ax, simulation, orbits)
 
 plt.show()
