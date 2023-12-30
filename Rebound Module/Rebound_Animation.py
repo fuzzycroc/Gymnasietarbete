@@ -1,13 +1,8 @@
 import rebound
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+from Values import Planet_Mass, X_Planet, Y_Planet, Vx_Planet, Vy_Planet, Limits
 
-
-# Initial conditions for the planet (you can change these values)
-initial_planet_x = 0.0
-initial_planet_y = 0.513
-initial_planet_vx = 0.0
-initial_planet_vy = 0.0
 
 
 # Function to set up the simulation
@@ -22,13 +17,12 @@ def setup_simulation(planet_x, planet_y, planet_vx, planet_vy):
     sim.add(m=m_star, x= d_star, vy=-0.5, hash="star2")
 
     # Add planet
-    m_planet = 0.001  # mass of the planet
-    sim.add(m=m_planet, x=planet_x, y=planet_y, vx=planet_vx, vy=planet_vy, hash="planet")
+    
+    sim.add(m=Planet_Mass, x=X_Planet, y=Y_Planet, vx=Vx_Planet, vy=Vy_Planet, hash="planet")
 
     # Set up simulation parameters
     sim.move_to_com()
     sim.integrator = "ias15"
-    sim.dt = 0.02
 
     return sim
 
@@ -38,23 +32,23 @@ def update(frame, ax, sim):
     ax.cla()
 
     # Plot stars
-    ax.scatter(sim.particles["star1"].x, sim.particles["star1"].y, color="red", s=10, label="Star 1")
-    ax.scatter(sim.particles["star2"].x, sim.particles["star2"].y, color="blue", s=10, label="Star 2")
+    ax.scatter(sim.particles["star1"].x, sim.particles["star1"].y, color="red", s=200, label="Star 1")
+    ax.scatter(sim.particles["star2"].x, sim.particles["star2"].y, color="blue", s=200, label="Star 2")
 
     # Plot planet
     ax.scatter(sim.particles["planet"].x, sim.particles["planet"].y, color="green", s=50, label="Planet")
 
 
     # Set plot limits and labels
-    ax.set_xlim(-2, 2)
-    ax.set_ylim(-2, 2)
+    ax.set_xlim(-Limits, Limits)
+    ax.set_ylim(-Limits, Limits)
     ax.set_xlabel("X Coordinate")
     ax.set_ylabel("Y Coordinate")
     ax.legend()
 
 
 # Set up the initial simulation
-simulation = setup_simulation(initial_planet_x, initial_planet_y, initial_planet_vx, initial_planet_vy)
+simulation = setup_simulation(X_Planet, Y_Planet, Vx_Planet, Vy_Planet)
 
 # Create the plot and animation
 fig, ax = plt.subplots()

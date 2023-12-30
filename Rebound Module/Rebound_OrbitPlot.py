@@ -1,11 +1,7 @@
 import rebound
 import matplotlib.pyplot as plt
+from Values import Planet_Mass, X_Planet, Y_Planet, Vx_Planet, Vy_Planet, Limits
 
-Planet_Mass = 0.001
-X_Planet = 0.1
-Y_Planet = 0.0
-Vx_Planet = 0.3
-Vy_Planet = 1.6
 
 # Function to set up the simulation
 def setup_simulation():
@@ -24,7 +20,6 @@ def setup_simulation():
     sim.move_to_com()
     sim.integrator = "ias15"
     
-
     return sim
 
 # Function to update the plot in each animation frame
@@ -39,7 +34,7 @@ def update(frame, ax, sim, orbits):
     ax.scatter(sim.particles["Planet"].x, sim.particles["Planet"].y, color="black", s=50, label="Planet")
 
     # Plot orbits for stars
-    for i in range(2):
+    for i in range(3):
         orbits[i].append((sim.particles[i].x, sim.particles[i].y))
         orbit_x, orbit_y = zip(*orbits[i])
         ax.plot(orbit_x, orbit_y, linestyle="--", alpha=0.5, color="gray")
@@ -51,8 +46,8 @@ def update(frame, ax, sim, orbits):
 
 
     # Set plot limits and labels
-    ax.set_xlim(-8, 8)
-    ax.set_ylim(-8, 8)
+    ax.set_xlim(-Limits, Limits)
+    ax.set_ylim(-Limits, Limits)
     ax.set_xlabel("X Coordinate")
     ax.set_ylabel("Y Coordinate")
     ax.legend()
@@ -64,7 +59,7 @@ simulation = setup_simulation()
 fig, ax = plt.subplots()
 
 # Initialize orbits
-orbits = [[] for _ in range(2)]
+orbits = [[] for _ in range(3)]
 
 # Update the plot without animation
 for _ in range(200):
