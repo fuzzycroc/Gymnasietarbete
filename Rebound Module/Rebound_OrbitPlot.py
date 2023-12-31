@@ -2,6 +2,7 @@ import rebound
 import matplotlib.pyplot as plt
 import numpy as np
 from Values import Planet_Mass, X_Planet, Y_Planet, Vx_Planet, Vy_Planet, Limits, Time_Step
+from scipy.signal import find_peaks
 
 # Function to set up the simulation
 def setup_simulation():
@@ -23,6 +24,11 @@ def setup_simulation():
 
     return sim
 
+# Function to detect peaks in the distance graph
+def detect_peaks(distances):
+    peaks, _ = find_peaks(distances)
+    return peaks
+
 # Function to update the plot in each animation frame
 def update(frame, ax1, ax2, sim, orbits, distances):
     sim.integrate(sim.t + 0.1)  # Integrate a small time step
@@ -33,6 +39,8 @@ def update(frame, ax1, ax2, sim, orbits, distances):
     ax1.scatter(sim.particles["star1"].x, sim.particles["star1"].y, color="red", s=100, label="Star 1")
     ax1.scatter(sim.particles["star2"].x, sim.particles["star2"].y, color="blue", s=100, label="Star 2")
     ax1.scatter(sim.particles["Planet"].x, sim.particles["Planet"].y, color="black", s=50, label="Planet")
+
+    ax1.sccatter()
 
     for i in range(3):
         orbits[i].append((sim.particles[i].x, sim.particles[i].y))
@@ -56,6 +64,13 @@ def update(frame, ax1, ax2, sim, orbits, distances):
     ax2.set_xlabel("Time Step")
     ax2.set_ylabel("Distance from Center(AU)")
     ax2.set_ylim(min(distances) - 0.1, max(distances) + 0.1)  # Set y-axis limits to include min and max values
+    ax2.legend()
+
+    # Detect peaks in the distance graph
+    peaks = detect_peaks(distances)
+
+    # Plot the detected peaks on the distance graph
+    ax2.plot(peaks, np.array(distances)[peaks], "rx", label="Peaks")
     ax2.legend()
 
     # Add text annotations for min and max values
