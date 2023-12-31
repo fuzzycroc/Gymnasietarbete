@@ -1,7 +1,7 @@
 import rebound
 import matplotlib.pyplot as plt
-from Values import Planet_Mass, X_Planet, Y_Planet, Vx_Planet, Vy_Planet, Limits
-
+import numpy as np
+from Values import Planet_Mass, X_Planet, Y_Planet, Vx_Planet, Vy_Planet, Limits, Time_Step
 
 # Function to set up the simulation
 def setup_simulation():
@@ -24,48 +24,56 @@ def setup_simulation():
     return sim
 
 # Function to update the plot in each animation frame
-def update(frame, ax, sim, orbits):
+def update(frame, ax1, ax2, sim, orbits, distances):
     sim.integrate(sim.t + 0.1)  # Integrate a small time step
-    ax.cla()
+    ax1.cla()
+    ax2.cla()
 
-    # Plot stars
-    ax.scatter(sim.particles["star1"].x, sim.particles["star1"].y, color="red", s=100, label="Star 1")
-    ax.scatter(sim.particles["star2"].x, sim.particles["star2"].y, color="blue", s=100, label="Star 2")
+    # Plot stars and orbits
+    ax1.scatter(sim.particles["star1"].x, sim.particles["star1"].y, color="red", s=100, label="Star 1")
+    ax1.scatter(sim.particles["star2"].x, sim.particles["star2"].y, color="blue", s=100, label="Star 2")
+    ax1.scatter(sim.particles["Planet"].x, sim.particles["Planet"].y, color="black", s=50, label="Planet")
 
-    ax.scatter(sim.particles["Planet"].x, sim.particles["Planet"].y, color="black", s=50, label="Planet")
-
-    plt.scatter(x=X_Planet, y=Y_Planet, marker= "*", s=40, color = "green", label = "Starting Position" )
-
-    # Plot orbits for stars
     for i in range(3):
         orbits[i].append((sim.particles[i].x, sim.particles[i].y))
         orbit_x, orbit_y = zip(*orbits[i])
-        ax.plot(orbit_x, orbit_y, linestyle="--", alpha=0.5, color="gray")
+        ax1.plot(orbit_x, orbit_y, linestyle="--", alpha=0.5, color="gray")
 
-    # Plot orbit for the planet
     planet_orbit = sim.particles["Planet"].sample_orbit()
-    orbit_x, orbit_y, _ = zip(*planet_orbit)  # Unpack three values instead of two
-    ax.plot(orbit_x, orbit_y, linestyle="--", alpha=0.5, color="gray")
+    orbit_x, orbit_y, _ = zip(*planet_orbit)
+    ax1.plot(orbit_x, orbit_y, linestyle="--", alpha=0.5, color="gray")
 
+    ax1.set_xlim(-Limits, Limits)
+    ax1.set_ylim(-Limits, Limits)
+    ax1.set_xlabel("X Coordinate(AU)")
+    ax1.set_ylabel("Y Coordinate(AU)")
+    ax1.legend()
 
-    # Set plot limits and labels
-    ax.set_xlim(-Limits, Limits)
-    ax.set_ylim(-Limits, Limits)
-    ax.set_xlabel("X Coordinate(AU)")
-    ax.set_ylabel("Y Coordinate(AU)")
-    ax.legend()
+    # Plot distance of the planet from the center as a function of time
+    distances.append(np.linalg.norm([sim.particles["Planet"].x, sim.particles["Planet"].y]))
+    ax2.plot(np.arange(len(distances)), distances, color="green", label="Distance from Center")
+
+    ax2.set_xlabel("Time Step")
+    ax2.set_ylabel("Distance from Center(AU)")
+    ax2.set_ylim(min(distances) - 0.1, max(distances) + 0.1)  # Set y-axis limits to include min and max values
+    ax2.legend()
+
+    # Add text annotations for min and max values
+    ax2.text(0.5, 0.9, f"Min: {min(distances):.2f} AU", transform=ax2.transAxes, ha='center', va='center', color='red')
+    ax2.text(0.5, 0.8, f"Max: {max(distances):.2f} AU", transform=ax2.transAxes, ha='center', va='center', color='blue')
 
 # Set up the initial simulation
 simulation = setup_simulation()
 
-# Create the plot
-fig, ax = plt.subplots()
+# Create the figure with two subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 
-# Initialize orbits
+# Initialize orbits and distances
 orbits = [[] for _ in range(3)]
+distances = []
 
 # Update the plot without animation
-for _ in range(1000):
-    update(_, ax, simulation, orbits)
+for step in range(Time_Step):
+    update(step, ax1, ax2, simulation, orbits, distances)
 
 plt.show()

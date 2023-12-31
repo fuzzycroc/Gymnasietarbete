@@ -1,11 +1,16 @@
 #File for storing values of planet and plot limits 
 import numpy as np
 
-Planet_Mass = 0.001
+Planet_Mass = 0.001             #Mass of the planet
 
-X_Planet = 6
-Y_Planet = 0.0
-Vx_Planet = 0.0
-Vy_Planet = np.sqrt(2/X_Planet)
+X_Planet = 0                   
+Y_Planet = 12   
 
-Limits = 8
+Velocity = np.sqrt(2/Y_Planet)  
+
+Vx_Planet = Velocity                               
+Vy_Planet = 0.0                      
+
+Time_Step = 100                    #Time_Step of Simulation
+
+Limits = X_Planet + Y_Planet + 2    #Graph limits  
