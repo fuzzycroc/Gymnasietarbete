@@ -1,6 +1,7 @@
 import rebound
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 from Values import Planet_Mass, X_Planet, Y_Planet, Vx_Planet, Vy_Planet, Limits, Time_Step
 from scipy.signal import find_peaks
 
@@ -40,8 +41,6 @@ def update(frame, ax1, ax2, sim, orbits, distances):
     ax1.scatter(sim.particles["star2"].x, sim.particles["star2"].y, color="blue", s=100, label="Star 2")
     ax1.scatter(sim.particles["Planet"].x, sim.particles["Planet"].y, color="black", s=50, label="Planet")
 
-    ax1.sccatter()
-
     for i in range(3):
         orbits[i].append((sim.particles[i].x, sim.particles[i].y))
         orbit_x, orbit_y = zip(*orbits[i])
@@ -73,9 +72,9 @@ def update(frame, ax1, ax2, sim, orbits, distances):
     ax2.plot(peaks, np.array(distances)[peaks], "rx", label="Peaks")
     ax2.legend()
 
-    # Add text annotations for min and max values
-    ax2.text(0.5, 0.9, f"Min: {min(distances):.2f} AU", transform=ax2.transAxes, ha='center', va='center', color='red')
-    ax2.text(0.5, 0.8, f"Max: {max(distances):.2f} AU", transform=ax2.transAxes, ha='center', va='center', color='blue')
+    # Add text annotations for all peak values
+    for peak in peaks:
+        ax2.text(peak, distances[peak], f"{distances[peak]:.2f} AU", ha='center', va='bottom', color='purple')
 
 # Set up the initial simulation
 simulation = setup_simulation()
@@ -90,5 +89,16 @@ distances = []
 # Update the plot without animation
 for step in range(Time_Step):
     update(step, ax1, ax2, simulation, orbits, distances)
+
+
+# Set titles for each subplot
+ax1.set_title("Orbits and Trajectory")
+ax2.set_title("Distance from Center Over Time")
+
+
+
+save_directory = r"C:\Users\Perie\Downloads\Gymnasiet_Arbete_Results"
+filename = os.path.join(save_directory, f"Planetary_Orbit{Y_Planet, Time_Step}.png")
+plt.savefig(filename)
 
 plt.show()

@@ -4,7 +4,7 @@ import numpy as np
 Planet_Mass = 0.001             #Mass of the planet
 
 X_Planet = 0                   
-Y_Planet = 6   
+Y_Planet = 8   
 
 Velocity = np.sqrt(2/Y_Planet)  
 
