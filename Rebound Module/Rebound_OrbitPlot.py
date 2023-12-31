@@ -41,6 +41,9 @@ def update(frame, ax1, ax2, sim, orbits, distances):
     ax1.scatter(sim.particles["star2"].x, sim.particles["star2"].y, color="blue", s=100, label="Star 2")
     ax1.scatter(sim.particles["Planet"].x, sim.particles["Planet"].y, color="black", s=50, label="Planet")
 
+    ax1.scatter(x=X_Planet, y=Y_Planet, marker="*", s=40, color="green", label="Starting position")
+
+
     for i in range(3):
         orbits[i].append((sim.particles[i].x, sim.particles[i].y))
         orbit_x, orbit_y = zip(*orbits[i])
