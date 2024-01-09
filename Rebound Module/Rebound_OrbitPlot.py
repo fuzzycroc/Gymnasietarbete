@@ -101,7 +101,7 @@ ax2.set_title("Distance from Center Over Time")
 
 
 save_directory = r"C:\Users\Perie\Downloads\Gymnasiet_Arbete_Results"
-filename = os.path.join(save_directory, f"Planetary_Orbit{Y_Planet, Time_Step}.png")
+filename = os.path.join(save_directory, f"Planetary_Orbit_Anti_Clockwise{X_Planet, Time_Step, Vy_Planet}.png")
 plt.savefig(filename)
 
 plt.show()
