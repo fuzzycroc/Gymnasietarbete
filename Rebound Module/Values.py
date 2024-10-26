@@ -3,14 +3,14 @@ import numpy as np
 
 Planet_Mass = 1e-30          #Mass of the planet
 
-X_Planet = 2                 
-Y_Planet = 0   
+X_Planet = 0                
+Y_Planet = 4   
 
-Velocity = np.sqrt(2/X_Planet)  
+Velocity = np.sqrt(2/Y_Planet)  
 
-Vx_Planet = 0.0                        
-Vy_Planet = Velocity             
+Vx_Planet = Velocity                      
+Vy_Planet =  0.0            
 
 Time_Step = 1500                    #Time_Step of Simulation
 
-Limits = X_Planet + Y_Planet + 2    #Graph limits  
+Limits = 8    #Graph limits  
